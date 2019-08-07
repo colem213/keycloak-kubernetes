@@ -1,0 +1,7 @@
+commonLabels:
+  env: local
+namePrefix: local-
+bases:
+- ../../base
+patches:
+- replica_count.yaml

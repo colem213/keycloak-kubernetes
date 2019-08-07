@@ -1,0 +1,6 @@
+commonLabels:
+  app: keycloak
+resources:
+- service.yaml
+- configMap.yaml
+- deployment.yaml
