@@ -12,6 +12,12 @@ spec:
       containers:
       - name: keycloak
         image: jboss/keycloak:6.0.1
+        readinessProbe:
+          httpGet:
+            path: /auth
+            port: 8080
+          initialDelaySeconds: 3
+          periodSeconds: 3
         volumeMounts:
         - mountPath: /opt/jboss/tools/cli/jgroups/discovery
           name: scripts
