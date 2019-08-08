@@ -1,5 +1,15 @@
 # Keycloak on Kubernetes
 
+## Generate configurations
+
+```bash
+kubectl kustomize overlays/local
+```  
+or  
+```bash
+kubectl apply -k overlays/local
+```
+
 ## Secrets
 
 ```yaml
