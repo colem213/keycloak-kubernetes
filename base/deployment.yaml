@@ -3,58 +3,23 @@ kind: Deployment
 metadata:
   name: keycloak
 spec:
-  selector:
-    matchLabels:
-      app: keycloak
   template:
-    metadata:
-      labels:
-        app: keycloak
     spec:
       volumes:
       - name: scripts
         configMap:
           name: keycloak-scripts
-      - name: secrets
-        secret:
-          secretName: aws-rds-jks
-          items:
-          - key: aws_rds.jks
-            path: aws_rds.jks
       containers:
       - name: keycloak
         image: jboss/keycloak:6.0.1
         volumeMounts:
         - mountPath: /opt/jboss/tools/cli/jgroups/discovery
           name: scripts
-        - mountPath: /tmp/keycloak/aws_rds.jks
-          name: secrets
-          subPath: aws_rds.jks
         env:
         - name: DB_VENDOR
           value: MYSQL
-        - name: DB_ADDR
-          valueFrom:
-            secretKeyRef:
-              name: keycloak-secret
-              key: database_host
-        - name: DB_PORT
-          valueFrom:
-            secretKeyRef:
-              name: keycloak-secret
-              key: database_port
         - name: DB_USER
           value: keycloak
-        - name: DB_PASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: keycloak-secret
-              key: database_password
-        - name: JDBC_PARAMS
-          valueFrom:
-            secretKeyRef:
-              name: keycloak-secret
-              key: database_ssl_params
         - name: JGROUPS_DISCOVERY_PROTOCOL
           value: dns.DNS_PING
         - name: JGROUPS_DISCOVERY_PROPERTIES

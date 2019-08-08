@@ -5,3 +5,5 @@ bases:
 - ../../base
 patches:
 - replica_count.yaml
+- database_ssl.yaml
+- database_credentials.yaml
