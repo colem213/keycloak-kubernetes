@@ -5,5 +5,7 @@ bases:
 - ../../base
 patches:
 - replica_count.yaml
-- database_ssl.yaml
+- database_ssl_env.yaml
+- database_ssl_volume.yaml
+- database_ssl_volume_mount.yaml
 - database_credentials.yaml
